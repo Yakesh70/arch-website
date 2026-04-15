@@ -1,0 +1,729 @@
+:root {
+  --background: #fbfaf6;
+  --ink: #181611;
+  --accent: #b19a57;
+  --line: rgba(24, 22, 17, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    linear-gradient(rgba(251, 250, 246, 0.84), rgba(251, 250, 246, 0.84)),
+    repeating-linear-gradient(
+      135deg,
+      rgba(24, 22, 17, 0.025) 0,
+      rgba(24, 22, 17, 0.025) 1px,
+      transparent 1px,
+      transparent 18px
+    );
+  color: var(--ink);
+  font-family: "Times New Roman", Times, serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.scrollProgress {
+  position: fixed;
+  z-index: 60;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  transform-origin: 0 50%;
+}
+
+.siteShell {
+  width: 100%;
+  min-height: 100vh;
+  padding: 128px clamp(16px, 5vw, 80px) 20px;
+}
+
+.siteHeader {
+  position: fixed;
+  z-index: 40;
+  inset: 0 0 auto;
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  padding: 16px clamp(16px, 5vw, 80px);
+  background:
+    linear-gradient(rgba(251, 250, 246, 0.94), rgba(251, 250, 246, 0.94)),
+    repeating-linear-gradient(
+      135deg,
+      rgba(24, 22, 17, 0.025) 0,
+      rgba(24, 22, 17, 0.025) 1px,
+      transparent 1px,
+      transparent 18px
+    );
+}
+
+.logoMark {
+  width: 214px;
+  min-width: 214px;
+  display: grid;
+  place-items: center;
+  color: #221f18;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: transform 420ms ease;
+}
+
+.logoMark:hover {
+  transform: translateY(-2px);
+}
+
+.logoMark span {
+  font-size: 1.1rem;
+  letter-spacing: 0.28em;
+}
+
+.logoMark strong {
+  margin-top: -1px;
+  font-size: 2.95rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.logoMark small {
+  margin-top: 2px;
+  border-top: 1px solid currentColor;
+  padding-top: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.63rem;
+  letter-spacing: 0.42em;
+}
+
+.navMenu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(14px, 1.75vw, 28px);
+}
+
+.navMenu a {
+  position: relative;
+  z-index: 2;
+  padding: 10px 0;
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(0.95rem, 1.25vw, 1.16rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.navMenu a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 3px;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 500ms ease;
+}
+
+.navMenu a:hover::after,
+.navMenu a.isActive::after {
+  transform: scaleX(1);
+}
+
+.homeGallery {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding-bottom: 38px;
+  overflow: clip;
+}
+
+.galleryPanel {
+  position: relative;
+  height: 75vh;
+  min-height: 520px;
+  overflow: hidden;
+  background: #e9e4da;
+  isolation: isolate;
+}
+
+.galleryPanel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: linear-gradient(
+    180deg,
+    rgba(24, 22, 17, 0) 54%,
+    rgba(24, 22, 17, 0.2) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 420ms ease;
+}
+
+.galleryPanel:hover::after {
+  opacity: 1;
+}
+
+.galleryImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+  will-change: clip-path, opacity, transform;
+}
+
+.lineOverlay {
+  position: absolute;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.lineOverlayTop {
+  top: 1.4rem;
+  right: 2%;
+  left: 0;
+  height: 36%;
+  border-top: 2px solid rgba(251, 250, 246, 0.82);
+  border-left: 2px solid rgba(251, 250, 246, 0.7);
+  transform: skewY(-8deg);
+}
+
+.lineOverlayBottom {
+  right: 12%;
+  bottom: 4.5rem;
+  width: 52%;
+  height: 18%;
+  border-top: 2px solid rgba(251, 250, 246, 0.82);
+  border-right: 2px solid rgba(251, 250, 246, 0.74);
+  transform: skewY(5deg);
+}
+
+.siteFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 12px 0 0;
+}
+
+.siteFooter p {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+}
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.socialLinks a {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  transition:
+    background 240ms ease,
+    border-color 240ms ease,
+    color 240ms ease;
+}
+
+.socialLinks a:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.innerHero {
+  min-height: 36vh;
+  display: flex;
+  align-items: end;
+  padding: clamp(42px, 7vw, 92px) 0 clamp(28px, 5vw, 64px);
+}
+
+.innerHero p,
+.contactPage p {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.innerHero h1,
+.contactPage h1 {
+  width: min(900px, 100%);
+  margin: 0 0 20px;
+  font-size: clamp(3.2rem, 8vw, 7.8rem);
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.innerHero span,
+.contactPage span,
+.contactPage a {
+  display: block;
+  width: min(660px, 100%);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  line-height: 1.65;
+}
+
+.portfolioGrid,
+.teamGrid,
+.servicePageGrid {
+  display: grid;
+  gap: 8px;
+  padding-bottom: 42px;
+}
+
+.portfolioGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.portfolioMotion {
+  min-height: 100%;
+}
+
+.portfolioCard,
+.teamCard,
+.servicePageItem {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.52);
+  transition:
+    box-shadow 320ms ease,
+    transform 320ms ease;
+}
+
+.portfolioCard:hover,
+.teamCard:hover,
+.servicePageItem:hover {
+  box-shadow: 0 22px 50px rgba(24, 22, 17, 0.12);
+  transform: translateY(-4px);
+}
+
+.portfolioCard img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  display: block;
+  object-fit: cover;
+  transition: transform 700ms ease;
+}
+
+.portfolioCard:hover img,
+.teamCard:hover img {
+  transform: scale(1.035);
+}
+
+.portfolioCard div,
+.teamCard,
+.servicePageItem {
+  padding: clamp(16px, 2.2vw, 28px);
+}
+
+.portfolioCard h2,
+.teamCard h2,
+.servicePageItem h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.55rem, 2.8vw, 2.55rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.portfolioCard p,
+.teamCard p,
+.teamCard small,
+.servicePageItem span {
+  margin: 0;
+  color: rgba(24, 22, 17, 0.64);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+}
+
+.teamGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.teamPhoto,
+.teamPlaceholder {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  margin-bottom: 18px;
+  overflow: hidden;
+  transition: transform 700ms ease;
+}
+
+.teamPhoto {
+  display: block;
+  object-fit: cover;
+  object-position: 50% 42%;
+  background: #e9e4da;
+  filter: saturate(0.96) contrast(1.02);
+}
+
+.teamPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(rgba(251, 250, 246, 0.2), rgba(251, 250, 246, 0.82)),
+    repeating-linear-gradient(
+      135deg,
+      rgba(177, 154, 87, 0.22) 0,
+      rgba(177, 154, 87, 0.22) 1px,
+      transparent 1px,
+      transparent 18px
+    );
+  transition:
+    background 360ms ease,
+    transform 700ms ease;
+}
+
+.teamPlaceholder span {
+  color: rgba(24, 22, 17, 0.55);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+
+.teamCard:hover .teamPlaceholder {
+  background:
+    linear-gradient(rgba(251, 250, 246, 0.1), rgba(251, 250, 246, 0.72)),
+    repeating-linear-gradient(
+      135deg,
+      rgba(177, 154, 87, 0.34) 0,
+      rgba(177, 154, 87, 0.34) 1px,
+      transparent 1px,
+      transparent 18px
+    );
+  transform: scale(1.025);
+}
+
+.teamCard small {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.servicePageGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.servicePageItem {
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 2px solid var(--accent);
+}
+
+.serviceHero span {
+  width: min(850px, 100%);
+}
+
+.serviceDetailGrid {
+  display: grid;
+  gap: 10px;
+  padding-bottom: 48px;
+}
+
+.serviceDetailCard {
+  display: grid;
+  grid-template-columns: 76px minmax(240px, 0.42fr) minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 38px);
+  align-items: stretch;
+  padding: clamp(22px, 4vw, 46px);
+  border-top: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.5);
+  transition:
+    box-shadow 320ms ease,
+    transform 320ms ease,
+    border-color 320ms ease;
+}
+
+.serviceDetailCard:hover {
+  border-color: rgba(177, 154, 87, 0.75);
+  box-shadow: 0 24px 58px rgba(24, 22, 17, 0.11);
+  transform: translateY(-3px);
+}
+
+.serviceNumber {
+  color: var(--accent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.serviceImageWrap {
+  min-height: 290px;
+  overflow: hidden;
+  background: #e9e4da;
+}
+
+.serviceImageWrap img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: saturate(0.95) contrast(1.02);
+  transition: transform 850ms ease;
+}
+
+.serviceDetailCard:hover .serviceImageWrap img {
+  transform: scale(1.045);
+}
+
+.serviceContent {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.85fr) minmax(230px, 1fr);
+  gap: clamp(16px, 3vw, 42px);
+  align-content: start;
+}
+
+.serviceContent h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 4.5rem);
+  font-weight: 400;
+  line-height: 0.98;
+}
+
+.serviceContent p {
+  margin: 0;
+  color: rgba(24, 22, 17, 0.72);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.serviceContent h3 {
+  grid-column: 2;
+  margin: 4px 0 -6px;
+  color: var(--accent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.serviceContent ul {
+  grid-column: 2;
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.serviceContent li {
+  position: relative;
+  padding-left: 18px;
+  color: rgba(24, 22, 17, 0.78);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.serviceContent li::before {
+  content: "";
+  position: absolute;
+  top: 0.72em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.contactPage {
+  min-height: calc(100vh - 180px);
+  display: flex;
+  align-items: center;
+}
+
+.contactDetails {
+  display: grid;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.contactDetails a {
+  width: fit-content;
+  border-bottom: 1px solid currentColor;
+}
+
+@media (max-width: 1023px) {
+  .siteShell {
+    padding: 132px 16px 58px;
+  }
+
+  .siteHeader {
+    height: 132px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 12px 10px;
+  }
+
+  .logoMark {
+    width: 155px;
+    min-width: 155px;
+  }
+
+  .logoMark span {
+    font-size: 0.8rem;
+  }
+
+  .logoMark strong {
+    font-size: 2.15rem;
+  }
+
+  .logoMark small {
+    font-size: 0.48rem;
+  }
+
+  .navMenu {
+    width: 100%;
+    justify-content: center;
+    gap: clamp(8px, 2.2vw, 16px);
+  }
+
+  .navMenu a {
+    font-size: clamp(0.52rem, 2.3vw, 0.88rem);
+    letter-spacing: 0.05em;
+  }
+
+  .homeGallery {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-bottom: 88px;
+  }
+
+  .galleryPanel {
+    height: 60vh;
+    min-height: 420px;
+  }
+
+  .lineOverlay {
+    display: none;
+  }
+
+  .siteFooter {
+    position: fixed;
+    z-index: 35;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    flex-direction: column-reverse;
+    gap: 4px;
+    padding: 8px 12px 10px;
+    background: rgba(251, 250, 246, 0.96);
+  }
+
+  .siteFooter p {
+    font-size: 0.75rem;
+  }
+
+  .socialLinks {
+    gap: 14px;
+  }
+
+  .socialLinks a {
+    width: 20px;
+    height: 20px;
+    font-size: 0.44rem;
+  }
+
+  .innerHero {
+    min-height: 30vh;
+  }
+
+  .portfolioGrid,
+  .teamGrid,
+  .servicePageGrid {
+    grid-template-columns: 1fr;
+    padding-bottom: 86px;
+  }
+
+  .serviceDetailGrid {
+    padding-bottom: 92px;
+  }
+
+  .serviceDetailCard {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .serviceImageWrap {
+    min-height: 240px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .serviceContent {
+    grid-template-columns: 1fr;
+  }
+
+  .serviceContent h3,
+  .serviceContent ul {
+    grid-column: auto;
+  }
+
+  .portfolioCard img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .contactPage {
+    min-height: calc(100vh - 210px);
+    padding-bottom: 76px;
+  }
+}
+
+@media (max-width: 420px) {
+  .navMenu {
+    gap: 6px;
+  }
+
+  .navMenu a {
+    font-size: 0.5rem;
+  }
+}
