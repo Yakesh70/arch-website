@@ -1,10 +1,13 @@
 import { Reveal, Stagger, StaggerItem } from "./MotionReveal";
+import { PortfolioCardImage } from "./PortfolioCardImage";
 import { SiteChrome } from "./SiteChrome";
 
 type GalleryItem = {
   title: string;
   location: string;
   image: string;
+  images?: string[];
+  description?: string;
 };
 
 type PortfolioPageProps = {
@@ -34,10 +37,16 @@ export function PortfolioPage({
         {gallery.map((item) => (
           <StaggerItem className="portfolioMotion" key={item.title}>
             <article className="portfolioCard">
-              <img src={item.image} alt={`${item.title} project`} />
+              <PortfolioCardImage
+                images={item.images?.length ? item.images : [item.image]}
+                title={item.title}
+              />
               <div>
                 <h2>{item.title}</h2>
                 <p>{item.location}</p>
+                {item.description ? (
+                  <p className="portfolioDescription">{item.description}</p>
+                ) : null}
               </div>
             </article>
           </StaggerItem>

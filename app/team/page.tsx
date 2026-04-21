@@ -12,26 +12,32 @@ const team = [
     id: "MEM 02",
     name: "Rahith H",
     role: "Architect",
+    image: "/team/mem-02.jpeg",
   },
   {
     id: "MEM 03",
     name: "Monesh Arun K",
     role: "Architect",
+    image: "/team/mem-03.jpeg",
   },
   {
     id: "MEM 04",
     name: "Divyaprakash R",
     role: "Architect",
+    image: "/team/mem-04.jpg",
   },
   {
     id: "MEM 05",
     name: "Fathima",
     role: "Architect",
+    image: "/team/mem-05.jpg",
+    imagePosition: "30% 30%",
   },
   {
     id: "MEM 06",
     name: "Nithya",
     role: "Architect",
+    image: "/team/mem-06.jpg",
   },
 ];
 
@@ -58,6 +64,11 @@ export default function TeamPage() {
                   className="teamPhoto"
                   src={member.image}
                   alt={member.name}
+                  style={
+                    "imagePosition" in member
+                      ? { objectPosition: member.imagePosition }
+                      : undefined
+                  }
                 />
               ) : (
                 <div

@@ -2,6 +2,18 @@ import { PortfolioPage } from "../components/PortfolioPage";
 
 const projects = [
   {
+    title: "Apartment @ Mylapore",
+    location: "Mylapore, Chennai",
+    image: "/architecture/mylapore-apartment/2.jpg",
+    images: [
+      "/architecture/mylapore-apartment/2.jpg",
+      "/architecture/mylapore-apartment/3.jpg",
+      "/architecture/mylapore-apartment/4.jpg",
+    ],
+    description:
+      "A multi-storey apartment project for Mylapore with a composed facade, elegant balcony detailing, and a strong street-facing identity. The visuals rotate every 5 seconds to show the full project from multiple angles.",
+  },
+  {
     title: "Courtyard Residence",
     location: "Bengaluru",
     image:
