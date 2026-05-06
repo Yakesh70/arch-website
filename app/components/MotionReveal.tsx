@@ -11,10 +11,11 @@ type RevealProps = HTMLMotionProps<"div"> & {
 export function Reveal({ children, delay = 0, ...props }: RevealProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 34 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.22 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay }}
+      style={{ opacity: 1 }}
       {...props}
     >
       {children}
@@ -29,7 +30,7 @@ type StaggerProps = HTMLMotionProps<"div"> & {
 export function Stagger({ children, ...props }: StaggerProps) {
   return (
     <motion.div
-      initial="hidden"
+      initial={false}
       whileInView="show"
       viewport={{ once: true, amount: 0.18 }}
       variants={{
@@ -55,7 +56,7 @@ export function StaggerItem({ children, ...props }: StaggerItemProps) {
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 30 },
+        hidden: { opacity: 1, y: 0 },
         show: {
           opacity: 1,
           y: 0,

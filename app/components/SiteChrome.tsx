@@ -65,15 +65,22 @@ export function SiteChrome({ children }: SiteChromeProps) {
         </Link>
 
         <nav className="navMenu" aria-label="Main navigation">
-          {navItems.map((item) => (
-            <Link
-              className={pathname === item.href ? "isActive" : undefined}
-              href={item.href}
-              key={item.label}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const isActive =
+              item.href === "/"
+                ? pathname === item.href
+                : pathname === item.href || pathname.startsWith(`${item.href}/`);
+
+            return (
+              <Link
+                className={isActive ? "isActive" : undefined}
+                href={item.href}
+                key={item.label}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
       </motion.header>
 

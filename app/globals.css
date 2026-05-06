@@ -274,6 +274,45 @@ img {
   padding: clamp(42px, 7vw, 92px) 0 clamp(28px, 5vw, 64px);
 }
 
+.teamHero {
+  min-height: 52vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.teamHero > div {
+  width: min(900px, 100%);
+  margin: 0 auto;
+}
+
+.teamHero p {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+}
+
+.teamHero h1,
+.teamHero span {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.teamHero h1 {
+  width: min(620px, 100%);
+  margin-bottom: 14px;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.02;
+}
+
+.teamHero span {
+  width: min(540px, 100%);
+  font-size: clamp(0.92rem, 1.15vw, 1.02rem);
+  line-height: 1.7;
+}
+
 .innerHero p,
 .contactPage p {
   margin: 0 0 12px;
@@ -337,18 +376,81 @@ img {
   transform: translateY(-4px);
 }
 
+.portfolioProjectToggle {
+  position: relative;
+  width: 100%;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.portfolioProjectStatic {
+  cursor: default;
+}
+
+.portfolioProjectLink {
+  text-decoration: none;
+}
+
+.portfolioProjectLink:hover {
+  box-shadow: none;
+}
+
+.portfolioCardPortrait.isOpen {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.86fr) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.portfolioCardGallery.isOpen {
+  display: block;
+}
+
+.portfolioCardLinked {
+  display: block;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
 .portfolioImageFrame {
   position: relative;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
+  background: #e4ddd0;
+}
+
+.portfolioImageFramePortrait {
+  min-height: clamp(420px, 46vw, 760px);
+  height: 100%;
+  aspect-ratio: auto;
+  background:
+    linear-gradient(rgba(24, 22, 17, 0.1), rgba(24, 22, 17, 0.04)),
+    #e4ddd0;
 }
 
 .portfolioCard img,
 .portfolioImage {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  height: 100%;
   display: block;
   object-fit: cover;
   transition: transform 700ms ease;
+  will-change: opacity, transform, filter;
+}
+
+.portfolioImagePortrait {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center top;
+  background: transparent;
 }
 
 .portfolioCard:hover img,
@@ -356,10 +458,243 @@ img {
   transform: scale(1.035);
 }
 
-.portfolioCard div,
+.portfolioCardStacked:hover .portfolioImage {
+  transform: scale(1.03);
+}
+
+.portfolioCardGallery:hover .portfolioImage {
+  transform: scale(1.02);
+}
+
+.portfolioCardLinked:hover .portfolioImage {
+  transform: none;
+}
+
+.portfolioCardDetails,
+.teamCard,
+.servicePageItem {
+  overflow: hidden;
+}
+
+.portfolioCardContent,
 .teamCard,
 .servicePageItem {
   padding: clamp(16px, 2.2vw, 28px);
+}
+
+.portfolioCardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.portfolioImageMeta {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: clamp(18px, 2vw, 24px);
+  background: linear-gradient(
+    180deg,
+    rgba(24, 22, 17, 0) 0%,
+    rgba(24, 22, 17, 0.74) 100%
+  );
+  color: #fbfaf6;
+}
+
+.portfolioImageMeta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(24, 22, 17, 0.18);
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+
+.portfolioImageTitle {
+  position: relative;
+  font-size: clamp(1.35rem, 2.6vw, 2.2rem);
+  line-height: 1.02;
+}
+
+.portfolioImageLocation {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.portfolioImageMetaCenter {
+  top: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  text-align: center;
+  background: transparent;
+  transition: background 320ms ease;
+}
+
+.portfolioImageMetaLinked {
+  top: 0;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+  background: transparent;
+}
+
+.portfolioImageMetaCenter::before {
+  opacity: 1;
+  background: rgba(24, 22, 17, 0.08);
+}
+
+.portfolioImageMetaOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(24, 22, 17, 0.22);
+}
+
+.portfolioCardStacked:hover .portfolioImageMetaCenter {
+  background: rgba(24, 22, 17, 0.08);
+}
+
+.portfolioCardStacked:hover .portfolioImageMetaCenter::before {
+  opacity: 1;
+  background: rgba(24, 22, 17, 0.36);
+}
+
+.portfolioCardStacked .portfolioImageTitle {
+  transform: translateY(14px);
+  transition: transform 320ms ease;
+}
+
+.portfolioCardStacked .portfolioImageLocation {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 260ms ease,
+    transform 320ms ease;
+}
+
+.portfolioCardStacked:hover .portfolioImageTitle,
+.portfolioCardStacked:hover .portfolioImageLocation {
+  transform: translateY(0);
+}
+
+.portfolioCardStacked:hover .portfolioImageLocation {
+  opacity: 1;
+}
+
+.portfolioCardDetails {
+  background: rgba(255, 255, 255, 0.68);
+  border-top: 1px solid rgba(24, 22, 17, 0.08);
+}
+
+.portfolioCardGallery .portfolioCardDetails {
+  background: rgba(255, 255, 255, 0.46);
+}
+
+.portfolioCardDetailsStatic {
+  height: auto;
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.portfolioCardStacked .portfolioCardContent {
+  padding-top: 18px;
+}
+
+.portfolioCardStacked .portfolioCardContent h2 {
+  font-size: clamp(1.2rem, 1.9vw, 1.6rem);
+}
+
+.portfolioCardStacked .portfolioCardContent p:first-of-type {
+  margin-bottom: 10px;
+  color: rgba(24, 22, 17, 0.5);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.portfolioCardGallery .portfolioImageMetaCenter::before {
+  background: rgba(24, 22, 17, 0.12);
+}
+
+.portfolioCardGallery:hover .portfolioImageMetaCenter::before {
+  background: rgba(24, 22, 17, 0.34);
+}
+
+.portfolioCardGallery .portfolioImageTitle {
+  transform: translateY(10px);
+  transition: transform 320ms ease;
+}
+
+.portfolioCardGallery .portfolioImageLocation {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 260ms ease,
+    transform 320ms ease;
+}
+
+.portfolioCardGallery:hover .portfolioImageTitle,
+.portfolioCardGallery:hover .portfolioImageLocation {
+  transform: translateY(0);
+}
+
+.portfolioCardGallery:hover .portfolioImageLocation {
+  opacity: 1;
+}
+
+.portfolioImageTitleLinked {
+  position: absolute;
+  font-size: clamp(1.08rem, 1.75vw, 1.5rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.portfolioCardDetailsMinimal {
+  min-height: 6px;
+  padding: 0;
+  background: transparent;
+  border-top: 0;
+}
+
+.portfolioDetailGallery {
+  display: grid;
+  gap: 14px;
+  padding: 0 clamp(16px, 2.2vw, 28px) clamp(16px, 2.2vw, 28px);
+}
+
+.portfolioDetailImageWrap {
+  position: relative;
+  overflow: hidden;
+  background: #e4ddd0;
+  aspect-ratio: 16 / 10;
+}
+
+.portfolioDetailImageWrapPortrait {
+  aspect-ratio: 4 / 5;
+}
+
+.portfolioDetailImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.portfolioDetailImagePortrait {
+  object-fit: contain;
+  object-position: center top;
+}
+
+.portfolioCardPortrait.isOpen .portfolioCardDetails {
+  border-top: 0;
+  border-left: 1px solid rgba(24, 22, 17, 0.08);
 }
 
 .portfolioCard h2,
@@ -452,6 +787,130 @@ img {
   margin-bottom: 8px;
   color: var(--accent);
   font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.teamCard h2 {
+  margin-bottom: 6px;
+  font-size: clamp(1.05rem, 1.55vw, 1.35rem);
+  line-height: 1.12;
+}
+
+.teamCard p {
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+
+.teamCard small {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+}
+
+.architectureProjectHero {
+  min-height: 28vh;
+}
+
+.architectureProjectWrap {
+  display: grid;
+  gap: clamp(18px, 3vw, 28px);
+  padding-bottom: 48px;
+}
+
+.architectureProjectLeadImageWrap {
+  overflow: hidden;
+  background: #e4ddd0;
+  aspect-ratio: 16 / 10;
+}
+
+.architectureProjectLeadImageWrapPortrait {
+  aspect-ratio: 4 / 5;
+}
+
+.architectureProjectLeadImage,
+.architectureProjectGalleryImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.architectureProjectLeadImagePortrait,
+.architectureProjectGalleryImagePortrait {
+  object-fit: contain;
+  object-position: center top;
+}
+
+.architectureProjectIntro {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.5fr) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 48px);
+  align-items: start;
+  padding: clamp(14px, 2vw, 22px) 0;
+  border-top: 1px solid var(--line);
+}
+
+.architectureProjectMeta p {
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.architectureProjectMeta h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 400;
+  line-height: 1.02;
+}
+
+.architectureProjectMeta span,
+.architectureProjectCopy p,
+.architectureProjectBack a {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.architectureProjectMeta span {
+  color: rgba(24, 22, 17, 0.54);
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.architectureProjectCopy p {
+  margin: 0;
+  color: rgba(24, 22, 17, 0.74);
+  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
+  line-height: 1.82;
+}
+
+.architectureProjectGallery {
+  display: grid;
+  gap: 14px;
+}
+
+.architectureProjectGalleryImageWrap {
+  overflow: hidden;
+  background: #e4ddd0;
+  aspect-ratio: 16 / 10;
+}
+
+.architectureProjectGalleryImageWrapPortrait {
+  aspect-ratio: 4 / 5;
+}
+
+.architectureProjectBack {
+  padding-top: 8px;
+}
+
+.architectureProjectBack a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -689,11 +1148,28 @@ img {
     min-height: 30vh;
   }
 
+  .teamHero {
+    text-align: center;
+  }
+
   .portfolioGrid,
   .teamGrid,
   .servicePageGrid {
     grid-template-columns: 1fr;
     padding-bottom: 86px;
+  }
+
+  .portfolioCardPortrait.isOpen {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolioImageFramePortrait {
+    min-height: clamp(420px, 96vw, 680px);
+  }
+
+  .portfolioCardPortrait.isOpen .portfolioCardDetails {
+    border-top: 1px solid rgba(24, 22, 17, 0.08);
+    border-left: 0;
   }
 
   .serviceDetailGrid {
@@ -717,6 +1193,10 @@ img {
   .serviceContent h3,
   .serviceContent ul {
     grid-column: auto;
+  }
+
+  .architectureProjectIntro {
+    grid-template-columns: 1fr;
   }
 
   .portfolioCard img {

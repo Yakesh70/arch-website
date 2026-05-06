@@ -44,7 +44,7 @@ const team = [
 export default function TeamPage() {
   return (
     <SiteChrome>
-      <section className="innerHero">
+      <section className="innerHero teamHero">
         <Reveal>
           <p>Team</p>
           <h1>People behind the practice</h1>
