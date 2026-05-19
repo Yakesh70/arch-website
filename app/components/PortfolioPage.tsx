@@ -25,6 +25,8 @@ type PortfolioPageProps = {
   intro: string;
   gallery: GalleryItem[];
   displayMode?: "expand" | "stacked-hover" | "gallery-detail" | "linked-gallery";
+  pinFooter?: boolean;
+  showFooter?: boolean;
 };
 
 export function PortfolioPage({
@@ -33,11 +35,13 @@ export function PortfolioPage({
   intro,
   gallery,
   displayMode = "expand",
+  pinFooter = false,
+  showFooter = true,
 }: PortfolioPageProps) {
   const [openProjectId, setOpenProjectId] = useState<string | null>(null);
 
   return (
-    <SiteChrome>
+    <SiteChrome pinFooter={pinFooter} showFooter={showFooter}>
       <section className="innerHero">
         <Reveal>
           <p>{eyebrow}</p>
@@ -46,13 +50,18 @@ export function PortfolioPage({
         </Reveal>
       </section>
 
-      <Stagger className="portfolioGrid">
+      <Stagger
+        className={`portfolioGrid ${
+          displayMode === "linked-gallery" ? "portfolioGridLinked" : ""
+        }`}
+      >
         {gallery.map((item, index) => {
           const projectId = item.id ?? `${item.title}-${index}`;
           const isOpen = openProjectId === projectId;
           const isStackedHover = displayMode === "stacked-hover";
           const isGalleryDetail = displayMode === "gallery-detail";
           const isLinkedGallery = displayMode === "linked-gallery";
+          const hasTitleSwapHover = displayMode === "expand";
           const projectImages = item.images?.length ? item.images : [item.image];
           const detailImages = projectImages.slice(1);
 
@@ -70,7 +79,9 @@ export function PortfolioPage({
                   item.imageVariant === "portrait" ? "portfolioCardPortrait" : ""
                 } ${isOpen ? "isOpen" : ""} ${
                   isStackedHover ? "portfolioCardStacked" : ""
-                } ${isGalleryDetail ? "portfolioCardGallery" : ""}`}
+                } ${isGalleryDetail ? "portfolioCardGallery" : ""} ${
+                  hasTitleSwapHover ? "portfolioCardTitleSwap" : ""
+                }`}
               >
                 {isStackedHover ? (
                   <div className="portfolioProjectToggle portfolioProjectStatic">
@@ -107,12 +118,31 @@ export function PortfolioPage({
                     <span
                       className={`portfolioImageMeta ${
                         isGalleryDetail ? "portfolioImageMetaCenter" : ""
+                      } ${
+                        hasTitleSwapHover ? "portfolioImageMetaAnimated" : ""
                       }`}
                     >
-                      <span className="portfolioImageTitle">{item.title}</span>
-                      <span className="portfolioImageLocation">
-                        {item.location}
-                      </span>
+                      {hasTitleSwapHover ? (
+                        <>
+                          <span className="portfolioImageMetaOverlay" />
+                          <span className="portfolioImageBottomGroup">
+                            <span className="portfolioImageTitle">{item.title}</span>
+                            <span className="portfolioImageLocation">
+                              {item.location}
+                            </span>
+                          </span>
+                          <span className="portfolioImageTitle portfolioImageTitleHoverCenter">
+                            {item.title}
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="portfolioImageTitle">{item.title}</span>
+                          <span className="portfolioImageLocation">
+                            {item.location}
+                          </span>
+                        </>
+                      )}
                     </span>
                   </button>
                 )}

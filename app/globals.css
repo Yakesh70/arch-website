@@ -117,37 +117,48 @@ img {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: clamp(14px, 1.75vw, 28px);
+  gap: 42px;
+}
+
+.menuToggle {
+  display: none;
 }
 
 .navMenu a {
   position: relative;
   z-index: 2;
-  padding: 10px 0;
-  font-family: "Times New Roman", Times, serif;
-  font-size: clamp(0.95rem, 1.25vw, 1.16rem);
-  letter-spacing: 0.1em;
+  padding: 8px 0;
+  font-family: Montserrat, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
+  color: #111;
+  text-decoration: none;
 }
 
 .navMenu a::after {
   content: "";
   position: absolute;
   right: 0;
-  bottom: 3px;
+  bottom: -6px;
   left: 0;
   height: 3px;
-  background: var(--accent);
+  background: #d4b11a;
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform 500ms ease;
+  transition: transform 0.4s ease;
 }
 
 .navMenu a:hover::after,
 .navMenu a.isActive::after {
   transform: scaleX(1);
 }
+
+
+
 
 .homeGallery {
   position: relative;
@@ -224,17 +235,25 @@ img {
 }
 
 .siteFooter {
+  position: relative;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 22px;
-  padding: 12px 0 0;
+  padding: 11px 0 0;
+}
+
+.siteShellPinnedFooter {
+  padding-bottom: 20px;
 }
 
 .siteFooter p {
   margin: 0;
-  font-size: 1rem;
-  letter-spacing: 0.04em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.24rem;
+  font-weight: 600;
+  letter-spacing: 0.015em;
 }
 
 .socialLinks {
@@ -244,27 +263,44 @@ img {
 }
 
 .socialLinks a {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.52rem;
-  font-weight: 700;
-  letter-spacing: 0;
+  color: #111;
   transition:
-    background 240ms ease,
-    border-color 240ms ease,
-    color 240ms ease;
+    color 240ms ease,
+    transform 240ms ease;
+}
+
+.socialLinks svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.socialLinks path,
+.socialLinks circle,
+.socialLinks rect {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.75;
+}
+
+.socialLinks text {
+  fill: currentColor;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: 400;
+  stroke: none;
 }
 
 .socialLinks a:hover {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: #fff;
+  color: var(--accent);
+  transform: translateY(-2px);
 }
 
 .innerHero {
@@ -355,6 +391,11 @@ img {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.portfolioGridLinked {
+  column-gap: 24px;
+  row-gap: 34px;
+}
+
 .portfolioMotion {
   min-height: 100%;
 }
@@ -417,6 +458,11 @@ img {
   transform: none;
 }
 
+.portfolioCardLinked:hover {
+  box-shadow: none;
+  transform: none;
+}
+
 .portfolioImageFrame {
   position: relative;
   aspect-ratio: 16 / 10;
@@ -453,7 +499,15 @@ img {
   background: transparent;
 }
 
-.portfolioCard:hover img,
+.portfolioCardTitleSwap:hover .portfolioImage {
+  transform: scale(1.5);
+}
+
+.portfolioCardTitleSwap .portfolioImage {
+  transition: transform 200ms ease;
+}
+
+.portfolioCard:not(.portfolioCardLinked):not(.portfolioCardTitleSwap):hover img,
 .teamCard:hover img {
   transform: scale(1.035);
 }
@@ -464,10 +518,6 @@ img {
 
 .portfolioCardGallery:hover .portfolioImage {
   transform: scale(1.02);
-}
-
-.portfolioCardLinked:hover .portfolioImage {
-  transform: none;
 }
 
 .portfolioCardDetails,
@@ -505,6 +555,13 @@ img {
   color: #fbfaf6;
 }
 
+.portfolioImageMetaAnimated {
+  top: 0;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
 .portfolioImageMeta::before {
   content: "";
   position: absolute;
@@ -514,10 +571,18 @@ img {
   transition: opacity 320ms ease;
 }
 
+.portfolioImageMetaAnimated::before {
+  display: none;
+}
+
 .portfolioImageTitle {
   position: relative;
+  font-family: Montserrat, "Avenir Next", "Century Gothic", Arial, Helvetica, sans-serif;
   font-size: clamp(1.35rem, 2.6vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
   line-height: 1.02;
+  text-transform: uppercase;
 }
 
 .portfolioImageLocation {
@@ -526,6 +591,49 @@ img {
   font-size: 0.82rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.portfolioImageBottomGroup {
+  position: absolute;
+  z-index: 2;
+  left: clamp(18px, 2vw, 24px);
+  bottom: clamp(18px, 2vw, 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: calc(100% - 48px);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.portfolioImageTitleHoverCenter {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: min(82%, 520px);
+  opacity: 0;
+  text-align: center;
+  transform: translate(-50%, calc(-50% + 10px)) scale(0.96);
+  transform-origin: center;
+  transition:
+    opacity 340ms ease,
+    transform 340ms ease;
+}
+
+.portfolioCardTitleSwap:hover .portfolioImageBottomGroup {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.portfolioCardTitleSwap:hover .portfolioImageTitleHoverCenter {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.portfolioCardTitleSwap:hover .portfolioImageMetaOverlay {
+  opacity: 1;
 }
 
 .portfolioImageMetaCenter {
@@ -545,6 +653,7 @@ img {
   justify-content: stretch;
   padding: 0;
   background: transparent;
+  overflow: hidden;
 }
 
 .portfolioImageMetaCenter::before {
@@ -555,7 +664,10 @@ img {
 .portfolioImageMetaOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(24, 22, 17, 0.22);
+  z-index: 1;
+  background: rgba(24, 22, 17, 0.32);
+  opacity: 0;
+  transition: opacity 320ms ease;
 }
 
 .portfolioCardStacked:hover .portfolioImageMetaCenter {
@@ -651,9 +763,31 @@ img {
 
 .portfolioImageTitleLinked {
   position: absolute;
-  font-size: clamp(1.08rem, 1.75vw, 1.5rem);
-  letter-spacing: 0.1em;
+  z-index: 2;
+  max-width: calc(100% - 56px);
+  font-family: Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1;
   text-transform: uppercase;
+  white-space: normal;
+  will-change: opacity, transform;
+}
+
+.portfolioImageTitleBottom {
+  left: 28px;
+  bottom: 26px;
+  text-align: left;
+}
+
+.portfolioImageTitleCenter {
+  top: 50%;
+  left: 50%;
+  width: min(82%, 520px);
+  max-width: none;
+  text-align: center;
+  transform-origin: center;
 }
 
 .portfolioCardDetailsMinimal {
@@ -721,15 +855,113 @@ img {
   line-height: 1.6;
 }
 
+.teamPage {
+  position: relative;
+  isolation: isolate;
+}
+
+.teamPage::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -128px calc(clamp(16px, 5vw, 80px) * -1) -90px;
+  background:
+    repeating-radial-gradient(
+      ellipse at 22% 58%,
+      transparent 0 56px,
+      rgba(24, 22, 17, 0.045) 57px 58px,
+      transparent 59px 112px
+    ),
+    repeating-radial-gradient(
+      ellipse at 73% 48%,
+      transparent 0 72px,
+      rgba(24, 22, 17, 0.04) 73px 74px,
+      transparent 75px 140px
+    ),
+    repeating-radial-gradient(
+      ellipse at 50% -4%,
+      transparent 0 62px,
+      rgba(24, 22, 17, 0.035) 63px 64px,
+      transparent 65px 126px
+    ),
+    #fbfbfa;
+}
+
+.teamIntro {
+  display: grid;
+  place-items: start center;
+  min-height: clamp(180px, 24vw, 260px);
+  padding: clamp(18px, 4vw, 24px) 0 clamp(24px, 4vw, 48px);
+  text-align: center;
+}
+
+.teamIntro > div {
+  width: min(930px, 100%);
+  margin: 0 auto;
+}
+
+.teamIntro h1 {
+  margin: 0 0 24px;
+  font-family: Montserrat, "Avenir Next", "Century Gothic", Arial, Helvetica, sans-serif;
+  font-size: clamp(1.2rem, 1.8vw, 1.58rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.teamIntro p {
+  width: min(930px, 100%);
+  margin: 0 auto;
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(1.05rem, 1.58vw, 1.42rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.42;
+}
+
 .teamGrid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.teamDirectory {
+  grid-template-columns: repeat(3, minmax(190px, 1fr));
+  column-gap: clamp(28px, 4vw, 60px);
+  row-gap: clamp(14px, 2vw, 28px);
+  align-items: end;
+  padding: clamp(10px, 2vw, 24px) min(7vw, 104px) 0;
+}
+
+.teamProfile {
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-height: clamp(335px, 33vw, 480px);
+  padding: 0 0 48px;
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+}
+
+.teamProfile:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.teamPortraitFrame {
+  position: absolute;
+  right: 0;
+  bottom: 74px;
+  left: 0;
+  height: calc(100% - 30px);
+  overflow: hidden;
+  background: transparent;
 }
 
 .teamPhoto,
 .teamPlaceholder {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  margin-bottom: 18px;
+  height: 100%;
   overflow: hidden;
   transition: transform 700ms ease;
 }
@@ -737,9 +969,13 @@ img {
 .teamPhoto {
   display: block;
   object-fit: cover;
-  object-position: 50% 42%;
-  background: #e9e4da;
+  object-position: 50% 30%;
+  background: transparent;
   filter: saturate(0.96) contrast(1.02);
+}
+
+.teamProfile:hover .teamPhoto {
+  transform: scale(1.025);
 }
 
 .teamPlaceholder {
@@ -782,29 +1018,40 @@ img {
   transform: scale(1.025);
 }
 
-.teamCard small {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--accent);
+.teamNameplate {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 80px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  padding: 16px 18px 14px;
+  border: 1px solid rgba(24, 22, 17, 0.08);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 3px 9px rgba(24, 22, 17, 0.12);
+  text-align: center;
+}
+
+.teamCard h2,
+.teamNameplate h2 {
+  margin: 0 0 8px;
+  font-family: Montserrat, "Avenir Next", "Century Gothic", Arial, Helvetica, sans-serif;
+  font-size: clamp(0.86rem, 1.05vw, 1.03rem);
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.12em;
+  line-height: 1.18;
   text-transform: uppercase;
 }
 
-.teamCard h2 {
-  margin-bottom: 6px;
-  font-size: clamp(1.05rem, 1.55vw, 1.35rem);
-  line-height: 1.12;
-}
-
-.teamCard p {
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
-}
-
-.teamCard small {
-  font-size: 0.68rem;
-  letter-spacing: 0.2em;
+.teamCard p,
+.teamNameplate p {
+  margin: 0;
+  color: rgba(24, 22, 17, 0.72);
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(0.78rem, 0.95vw, 0.96rem);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
 }
 
 .architectureProjectHero {
@@ -938,6 +1185,7 @@ img {
 }
 
 .serviceDetailCard {
+  position: relative;
   display: grid;
   grid-template-columns: 76px minmax(240px, 0.42fr) minmax(0, 1fr);
   gap: clamp(18px, 3vw, 38px);
@@ -945,19 +1193,46 @@ img {
   padding: clamp(22px, 4vw, 46px);
   border-top: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  isolation: isolate;
   transition:
+    background 320ms ease,
     box-shadow 320ms ease,
     transform 320ms ease,
     border-color 320ms ease;
+  will-change: filter, opacity, transform;
+}
+
+.serviceDetailCard::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(177, 154, 87, 0.16), transparent 38%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.34));
+  opacity: 0;
+  transform: translateX(-18%);
+  transition:
+    opacity 420ms ease,
+    transform 620ms ease;
 }
 
 .serviceDetailCard:hover {
   border-color: rgba(177, 154, 87, 0.75);
+  background: rgba(255, 255, 255, 0.72);
   box-shadow: 0 24px 58px rgba(24, 22, 17, 0.11);
   transform: translateY(-3px);
 }
 
+.serviceDetailCard:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 .serviceNumber {
+  position: relative;
+  z-index: 2;
   color: var(--accent);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.9rem;
@@ -966,9 +1241,20 @@ img {
 }
 
 .serviceImageWrap {
+  position: relative;
   min-height: 290px;
   overflow: hidden;
   background: #e9e4da;
+}
+
+.serviceImageWrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(24, 22, 17, 0), rgba(24, 22, 17, 0.2));
+  opacity: 0;
+  transition: opacity 360ms ease;
+  pointer-events: none;
 }
 
 .serviceImageWrap img {
@@ -977,14 +1263,16 @@ img {
   display: block;
   object-fit: cover;
   filter: saturate(0.95) contrast(1.02);
-  transition: transform 850ms ease;
+  will-change: transform;
 }
 
-.serviceDetailCard:hover .serviceImageWrap img {
-  transform: scale(1.045);
+.serviceDetailCard:hover .serviceImageWrap::after {
+  opacity: 1;
 }
 
 .serviceContent {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: minmax(190px, 0.85fr) minmax(230px, 1fr);
   gap: clamp(16px, 3vw, 42px);
@@ -996,6 +1284,7 @@ img {
   font-size: clamp(2rem, 4vw, 4.5rem);
   font-weight: 400;
   line-height: 0.98;
+  will-change: transform;
 }
 
 .serviceContent p {
@@ -1032,6 +1321,7 @@ img {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.96rem;
   line-height: 1.55;
+  will-change: opacity, transform;
 }
 
 .serviceContent li::before {
@@ -1045,39 +1335,304 @@ img {
   background: var(--accent);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .serviceDetailCard,
+  .serviceDetailCard::before,
+  .serviceImageWrap::after {
+    transition: none;
+  }
+
+  .serviceDetailCard:hover {
+    transform: none;
+  }
+}
+
 .contactPage {
   min-height: calc(100vh - 180px);
+}
+
+.contactPageDetailed {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(360px, 0.95fr) minmax(360px, 1fr);
+  column-gap: clamp(42px, 5vw, 82px);
+  row-gap: clamp(48px, 6vw, 88px);
+  align-items: start;
+  padding: clamp(34px, 6vw, 84px) clamp(12px, 2vw, 20px) 76px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.contactPageDetailed::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -180px calc(clamp(16px, 5vw, 80px) * -1) -120px;
+  background:
+    repeating-radial-gradient(
+      ellipse at 18% 12%,
+      transparent 0 72px,
+      rgba(24, 22, 17, 0.045) 73px 74px,
+      transparent 75px 146px
+    ),
+    repeating-radial-gradient(
+      ellipse at 68% 52%,
+      transparent 0 82px,
+      rgba(24, 22, 17, 0.04) 83px 84px,
+      transparent 85px 164px
+    ),
+    repeating-radial-gradient(
+      ellipse at 28% 88%,
+      transparent 0 70px,
+      rgba(24, 22, 17, 0.042) 71px 72px,
+      transparent 73px 138px
+    ),
+    #fbfbfa;
+}
+
+.contactFormPanel {
+  min-height: clamp(420px, 43vw, 550px);
+  padding: clamp(30px, 3vw, 40px);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.contactFormPanel h1,
+.contactInfoPanel h2,
+.contactInquiryPanel h2,
+.contactMapPanel h2 {
+  margin: 0;
+  font-family: Montserrat, "Avenir Next", "Century Gothic", Arial, Helvetica, sans-serif;
+  font-size: clamp(1.05rem, 1.28vw, 1.34rem);
+  font-weight: 650;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.contactFormPanel form {
+  display: grid;
+  gap: 28px;
+  margin-top: 34px;
+}
+
+.contactFormPanel label {
+  display: grid;
+  gap: 12px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(0.94rem, 1.1vw, 1.05rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.contactFormPanel label span {
+  width: auto;
+  color: rgba(24, 22, 17, 0.76);
+  font: inherit;
+  line-height: 1.35;
+}
+
+.contactFormPanel input,
+.contactFormPanel textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(24, 22, 17, 0.1);
+  border-radius: 0;
+  padding: 12px 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  outline: none;
+  resize: none;
+  transition: border-color 220ms ease;
+}
+
+.contactFormPanel input:focus,
+.contactFormPanel textarea:focus {
+  border-bottom-color: var(--accent);
+}
+
+.contactFormPanel button {
+  justify-self: end;
+  min-width: 108px;
+  height: 56px;
+  border: 0;
+  margin-top: 10px;
+  background: #f4db27;
+  color: #111;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 220ms ease,
+    transform 220ms ease;
+}
+
+.contactFormPanel button:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+.contactInfoPanel {
+  display: grid;
+  gap: clamp(32px, 4vw, 52px);
+  padding-top: 8px;
+}
+
+.contactInfoPanel section {
+  display: grid;
+  gap: 18px;
+}
+
+.contactInfoPanel p,
+.contactInfoPanel a,
+.contactInfoPanel strong,
+.contactInquiryPanel p {
+  width: auto;
+  margin: 0;
+  color: rgba(24, 22, 17, 0.9);
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(1rem, 1.13vw, 1.12rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.52;
+  text-transform: none;
+}
+
+.contactInfoPanel strong {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(0.92rem, 1.02vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.contactInquiryPanel {
+  display: grid;
+  gap: 20px;
+  align-self: start;
+  max-width: 780px;
+}
+
+.contactMapPanel {
+  display: grid;
+  gap: 28px;
+}
+
+.contactMapFrame {
+  min-height: clamp(260px, 26vw, 350px);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.34)),
+    repeating-linear-gradient(
+      28deg,
+      transparent 0 26px,
+      rgba(41, 93, 129, 0.2) 27px 31px,
+      transparent 32px 78px
+    ),
+    repeating-linear-gradient(
+      104deg,
+      transparent 0 38px,
+      rgba(41, 93, 129, 0.16) 39px 43px,
+      transparent 44px 96px
+    ),
+    #edf2f3;
+  overflow: hidden;
+}
+
+.contactMapFrame iframe {
+  width: 100%;
+  height: clamp(260px, 26vw, 350px);
+  display: block;
+  border: 0;
+  filter: grayscale(0.1) saturate(0.82);
+}
+
+.contactSocialLinks {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(20px, 2.2vw, 32px);
+  padding-top: 2px;
 }
 
-.contactDetails {
-  display: grid;
-  gap: 10px;
-  margin-top: 26px;
+.contactSocialLinks a {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.65rem;
+  line-height: 1;
+  transition:
+    color 220ms ease,
+    transform 220ms ease;
 }
 
-.contactDetails a {
-  width: fit-content;
-  border-bottom: 1px solid currentColor;
+.contactSocialLinks svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.contactSocialLinks path,
+.contactSocialLinks circle,
+.contactSocialLinks rect {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
+}
+
+.contactSocialLinks span {
+  width: auto;
+  color: currentColor;
+  font: inherit;
+  line-height: 1;
+}
+
+.contactSocialLinks a:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 1023px) {
   .siteShell {
-    padding: 132px 16px 58px;
+    padding: 96px 16px 58px;
   }
 
   .siteHeader {
-    height: 132px;
-    flex-direction: column;
+    height: 96px;
+    flex-direction: row;
     justify-content: center;
-    gap: 8px;
-    padding: 8px 12px 10px;
+    gap: 16px;
+    padding: 10px 16px;
   }
 
   .logoMark {
     width: 155px;
     min-width: 155px;
+  }
+
+  /* Keep pinned footer visible on smaller viewports */
+  .siteShellPinnedFooter {
+    padding-bottom: 120px;
+  }
+
+  .siteShellPinnedFooter > .siteFooter {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 60;
+    padding: 12px 16px;
+    background: rgba(251, 250, 246, 0.98);
+    box-shadow: 0 -8px 24px rgba(24,22,17,0.08);
   }
 
   .logoMark span {
@@ -1092,15 +1647,105 @@ img {
     font-size: 0.48rem;
   }
 
-  .navMenu {
-    width: 100%;
+  .menuToggle {
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(24, 22, 17, 0.22);
+    border-radius: 0;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: clamp(8px, 2.2vw, 16px);
+    gap: 5px;
+    background: rgba(251, 250, 246, 0.88);
+    color: var(--ink);
+    cursor: pointer;
+    transition:
+      border-color 220ms ease,
+      background 220ms ease,
+      transform 220ms ease;
+  }
+
+  .menuToggle:hover,
+  .menuToggle.isOpen {
+    border-color: rgba(177, 154, 87, 0.72);
+    background: rgba(255, 255, 255, 0.96);
+  }
+
+  .menuToggle span {
+    width: 20px;
+    height: 2px;
+    background: currentColor;
+    transform-origin: center;
+    transition:
+      opacity 180ms ease,
+      transform 220ms ease;
+  }
+
+  .menuToggle.isOpen span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menuToggle.isOpen span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menuToggle.isOpen span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .navMenu {
+    position: absolute;
+    top: 100%;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    max-height: 0;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    border: 1px solid rgba(24, 22, 17, 0.12);
+    border-top: 0;
+    background:
+      linear-gradient(rgba(251, 250, 246, 0.98), rgba(251, 250, 246, 0.98)),
+      repeating-linear-gradient(
+        135deg,
+        rgba(24, 22, 17, 0.025) 0,
+        rgba(24, 22, 17, 0.025) 1px,
+        transparent 1px,
+        transparent 18px
+      );
+    box-shadow: 0 20px 40px rgba(24, 22, 17, 0.1);
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition:
+      max-height 280ms ease,
+      opacity 220ms ease,
+      transform 220ms ease;
+  }
+
+  .navMenu.isOpen {
+    max-height: 420px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .navMenu a {
-    font-size: clamp(0.52rem, 2.3vw, 0.88rem);
-    letter-spacing: 0.05em;
+    display: block;
+    padding: 16px 18px;
+    border-top: 1px solid rgba(24, 22, 17, 0.08);
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+  }
+
+  .navMenu a::after {
+    right: 18px;
+    bottom: 10px;
+    left: 18px;
   }
 
   .homeGallery {
@@ -1119,11 +1764,7 @@ img {
   }
 
   .siteFooter {
-    position: fixed;
-    z-index: 35;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    position: static;
     flex-direction: column-reverse;
     gap: 4px;
     padding: 8px 12px 10px;
@@ -1157,6 +1798,39 @@ img {
   .servicePageGrid {
     grid-template-columns: 1fr;
     padding-bottom: 86px;
+  }
+
+  .teamPage::before {
+    inset: -96px -16px -100px;
+  }
+
+  .teamIntro {
+    min-height: auto;
+    padding: 48px 0 36px;
+  }
+
+  .teamIntro h1 {
+    margin-bottom: 20px;
+    font-size: 1.08rem;
+  }
+
+  .teamIntro p {
+    max-width: 34rem;
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .teamDirectory {
+    row-gap: 58px;
+    padding: 26px clamp(10px, 7vw, 44px) 112px;
+  }
+
+  .teamProfile {
+    min-height: min(116vw, 500px);
+  }
+
+  .portfolioGridLinked {
+    row-gap: 22px;
   }
 
   .portfolioCardPortrait.isOpen {
@@ -1207,14 +1881,50 @@ img {
     min-height: calc(100vh - 210px);
     padding-bottom: 76px;
   }
+
+  .contactPageDetailed {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding: 32px 0 100px;
+  }
+
+  .contactPageDetailed::before {
+    inset: -96px -16px -120px;
+  }
+
+  .contactFormPanel {
+    min-height: auto;
+    padding: 26px 22px 30px;
+  }
+
+  .contactFormPanel form {
+    gap: 22px;
+    margin-top: 26px;
+  }
+
+  .contactInfoPanel {
+    gap: 30px;
+    padding-top: 0;
+  }
+
+  .contactMapPanel {
+    gap: 18px;
+  }
+
+  .contactMapFrame,
+  .contactMapFrame iframe {
+    height: 300px;
+  }
 }
 
 @media (max-width: 420px) {
   .navMenu {
-    gap: 6px;
+    right: 12px;
+    left: 12px;
+    width: auto;
   }
 
   .navMenu a {
-    font-size: 0.5rem;
+    font-size: 0.72rem;
   }
 }

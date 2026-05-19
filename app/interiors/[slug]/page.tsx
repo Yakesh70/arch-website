@@ -3,26 +3,23 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Reveal, Stagger, StaggerItem } from "../../components/MotionReveal";
 import { SiteChrome } from "../../components/SiteChrome";
-import {
-  architectureProjects,
-  getArchitectureProject,
-} from "../projects";
+import { interiorProjects, getInteriorProject } from "../projects";
 
-type ArchitectureProjectPageProps = {
+type InteriorProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return architectureProjects.map((project) => ({
+  return interiorProjects.map((project) => ({
     slug: project.slug,
   }));
 }
 
 export async function generateMetadata({
   params,
-}: ArchitectureProjectPageProps): Promise<Metadata> {
+}: InteriorProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = getArchitectureProject(slug);
+  const project = getInteriorProject(slug);
 
   if (!project) {
     return {};
@@ -34,11 +31,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function ArchitectureProjectPage({
+export default async function InteriorProjectPage({
   params,
-}: ArchitectureProjectPageProps) {
+}: InteriorProjectPageProps) {
   const { slug } = await params;
-  const project = getArchitectureProject(slug);
+  const project = getInteriorProject(slug);
 
   if (!project) {
     notFound();
@@ -50,7 +47,7 @@ export default async function ArchitectureProjectPage({
     <SiteChrome>
       <section className="innerHero architectureProjectHero">
         <Reveal>
-          <p>Architecture</p>
+          <p>Interior</p>
           <h1 style={{ fontSize: "clamp(2.2rem, 5vw, 5.5rem)" }}>{project.title}</h1>
           <span>{project.location}</span>
         </Reveal>
@@ -115,7 +112,7 @@ export default async function ArchitectureProjectPage({
         ) : null}
 
         <Reveal className="architectureProjectBack" delay={0.1}>
-          <Link href="/architectures">Back to Architecture</Link>
+          <Link href="/interiors">Back to Interior</Link>
         </Reveal>
       </section>
     </SiteChrome>

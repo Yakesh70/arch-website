@@ -1,5 +1,6 @@
 import { Reveal, Stagger, StaggerItem } from "../components/MotionReveal";
 import { SiteChrome } from "../components/SiteChrome";
+import { TeamMemberCard } from "../components/TeamMemberCard";
 
 const team = [
   {
@@ -43,48 +44,27 @@ const team = [
 
 export default function TeamPage() {
   return (
-    <SiteChrome>
-      <section className="innerHero teamHero">
-        <Reveal>
-          <p>Team</p>
-          <h1>People behind the practice</h1>
-          <span>
-            Meet the architects shaping Studio V - ARC through design thinking,
+    <SiteChrome pinFooter={true} showFooter={true}>
+      <div className="teamPage">
+        <section className="teamIntro">
+          <Reveal>
+            <h1>Meet The Team</h1>
+             <h1>People behind the practice</h1>
+            <p>
+              Meet the architects shaping Studio V - ARC through design thinking,
             detailing, coordination, and careful project execution.
-          </span>
-        </Reveal>
-      </section>
+            </p>
+          </Reveal>
+        </section>
 
-      <Stagger className="teamGrid">
-        {team.map((member) => (
-          <StaggerItem key={member.name}>
-            <article className="teamCard">
-              {member.image ? (
-                <img
-                  className="teamPhoto"
-                  src={member.image}
-                  alt={member.name}
-                  style={
-                    "imagePosition" in member
-                      ? { objectPosition: member.imagePosition }
-                      : undefined
-                  }
-                />
-              ) : (
-                <div
-                  className="teamPlaceholder"
-                  aria-label={`${member.name} photo placeholder`}
-                >
-                  <span>{member.id}</span>
-                </div>
-              )}
-              <small>{member.id}</small>
-              <h2>{member.name}</h2>
-              <p>{member.role}</p>
-            </article>
-          </StaggerItem>
-        ))}
-      </Stagger>
+        <Stagger className="teamGrid teamDirectory">
+          {team.map((member) => (
+            <StaggerItem key={member.name}>
+              <TeamMemberCard member={member} />
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </div>
     </SiteChrome>
   );
 }

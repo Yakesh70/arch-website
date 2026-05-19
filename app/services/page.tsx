@@ -1,5 +1,6 @@
 import { Reveal, Stagger, StaggerItem } from "../components/MotionReveal";
 import { SiteChrome } from "../components/SiteChrome";
+import { ServiceCard } from "./ServiceCard";
 
 const services = [
   {
@@ -113,24 +114,7 @@ export default function ServicesPage() {
       <Stagger className="serviceDetailGrid">
         {services.map((service, index) => (
           <StaggerItem key={service.title}>
-            <article className="serviceDetailCard">
-              <div className="serviceNumber">
-                {String(index + 1).padStart(2, "0")}
-              </div>
-              <div className="serviceImageWrap">
-                <img src={service.image} alt={`${service.title} service`} />
-              </div>
-              <div className="serviceContent">
-                <h2>{service.title}</h2>
-                <p>{service.description}</p>
-                <h3>What we offer</h3>
-                <ul>
-                  {service.offers.map((offer) => (
-                    <li key={offer}>{offer}</li>
-                  ))}
-                </ul>
-              </div>
-            </article>
+            <ServiceCard service={service} index={index} />
           </StaggerItem>
         ))}
       </Stagger>
