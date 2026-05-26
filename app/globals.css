@@ -1084,8 +1084,8 @@ img {
 
 .architectureProjectLeadImagePortrait,
 .architectureProjectGalleryImagePortrait {
-  object-fit: contain;
-  object-position: center top;
+  object-fit: cover;
+  object-position: center;
 }
 
 .architectureProjectIntro {
