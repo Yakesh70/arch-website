@@ -1,7 +1,7 @@
 :root {
   --background: #fbfaf6;
   --ink: #181611;
-  --accent: #b19a57;
+  --accent: #0066cc;
   --line: rgba(24, 22, 17, 0.18);
 }
 
@@ -146,7 +146,7 @@ img {
   bottom: -6px;
   left: 0;
   height: 3px;
-  background: #d4b11a;
+  background: #0066cc;
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 0.4s ease;
@@ -921,11 +921,11 @@ img {
 }
 
 .teamGrid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .teamDirectory {
-  grid-template-columns: repeat(3, minmax(190px, 1fr));
+  grid-template-columns: repeat(4, minmax(190px, 1fr));
   column-gap: clamp(28px, 4vw, 60px);
   row-gap: clamp(14px, 2vw, 28px);
   align-items: end;
@@ -1608,7 +1608,7 @@ img {
   .siteHeader {
     height: 96px;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     gap: 16px;
     padding: 10px 16px;
   }

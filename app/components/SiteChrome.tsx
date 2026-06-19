@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useSpring } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
@@ -112,9 +113,14 @@ export function SiteChrome({
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
         <Link className="logoMark magneticLogo" href="/" aria-label="Studio V Arc home">
-          <span>Studio</span>
-          <strong>V</strong>
-          <small>Arc</small>
+          <Image
+            src="/team/IMG_3753-removebg-preview.png"
+            alt="Studio V Arc Logo"
+            width={220}
+            height={120}
+            priority
+            style={{ width: '100%', height: 'auto', maxWidth: '220px' }}
+          />
         </Link>
 
         <button

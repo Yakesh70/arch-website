@@ -53,7 +53,7 @@ export default function ContactPage() {
       <section className="contactPage contactPageDetailed">
         <Reveal className="contactFormPanel">
           <h1>Contact Us</h1>
-          <form action="mailto:studiovarc@gmail.com" method="post">
+          <form action="mailto:studiovarc.ad@gmail.com" method="post">
             <label>
               <span>Name*</span>
               <input name="name" required type="text" />
@@ -78,7 +78,7 @@ export default function ContactPage() {
               include a portfolio and a resume in pdf format (no larger than
               10Mb) and to be submitted.
             </p>
-            <strong>To: studiovarc@gmail.com</strong>
+            <strong>To: studiovarc.ad@gmail.com</strong>
           </section>
 
           <section>
@@ -93,9 +93,11 @@ export default function ContactPage() {
           <section>
             <h2>Contact</h2>
             <p>
-              <a href="tel:+918248686349">8248686349</a>
+              <a href="tel:+918248686349">+91 82486 86349</a>
               <br />
-              <a href="mailto:studiovarc@gmail.com">studiovarc@gmail.com</a>
+              <a href="tel:+917708640172">+91 77086 40172</a>
+              <br />
+              <a href="mailto:studiovarc.ad@gmail.com">studiovarc.ad@gmail.com</a>
             </p>
           </section>
         </Reveal>

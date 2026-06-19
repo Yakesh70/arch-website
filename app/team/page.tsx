@@ -40,6 +40,12 @@ const team = [
     role: "Architect",
     image: "/team/mem-06.jpg",
   },
+  {
+    id: "MEM 07",
+    name: "Kishore",
+    role: "Architect",
+    image: "/team/WhatsApp Image 2026-06-19 at 6.52.10 PM.jpeg",
+  },
 ];
 
 export default function TeamPage() {
