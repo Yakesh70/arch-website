@@ -28,13 +28,6 @@ const team = [
     image: "/team/mem-04.jpg",
   },
   {
-    id: "MEM 05",
-    name: "Fathima",
-    role: "Architect",
-    image: "/team/mem-05.jpg",
-    imagePosition: "30% 30%",
-  },
-  {
     id: "MEM 06",
     name: "Nithya",
     role: "Architect",
